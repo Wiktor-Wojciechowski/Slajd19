@@ -1,7 +1,6 @@
 <?php
 require 'config.php';
 
-use function mysqli_real_escape_string as mres;
 
 if (!empty($_SESSION["id"])) {
     header("Location: calculator.php");
@@ -10,17 +9,23 @@ if (!empty($_SESSION["id"])) {
         $usernameoremail = $_POST["usernameoremail"];
         $password = $_POST["password"];
 
-        $result = $conn->query(sprintf(
-            "SELECT * FROM user_tb WHERE (username = '%s' OR email = '%s') AND password = '%s'",
-            mres($conn, $usernameoremail),
-            mres($conn, $usernameoremail),
-            mres($conn, $password)
-        ));
+        $stmt = $conn->prepare("SELECT * FROM user_tb WHERE (username = ? OR email = ?)");
+        //specify type of each variable in the "" 3s - 3 vars of string type
+        $stmt->bind_param("ss", $usernameoremail, $usernameoremail);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
         $row = $result->fetch_assoc();
+
         if ($result->num_rows > 0) {
-            $_SESSION["id"] = $row["id"];
-            $_SESSION["logged-in"] = true;
-            header("Location: calculator.php");
+            if ($row['password'] == $password) {
+                $_SESSION["id"] = $row["id"];
+                $_SESSION["logged-in"] = true;
+                header("Location: calculator.php");
+            } else {
+                echo "Password incorrect";
+            }
         } else {
             echo "User not registered";
         }
