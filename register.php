@@ -52,17 +52,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
     //check if username taken
 
     $stmt = $conn->prepare("SELECT * FROM user_tb WHERE username = ?");
-    $stmt->bind_param("is", $username);
+    $stmt->bind_param("s", $username);
 
     $stmt->execute();
 
-    $res = $stmt->fetch();
+    $result = $stmt->get_result();
 
-    $result = $conn->query(sprintf("SELECT * FROM user_tb WHERE username = '%s'", mysqli_real_escape_string($conn, $username)));
     if ($result->num_rows > 0) {
         $username_err = "Username taken";
     } else /* is username not taken check if email taken*/ {
-        $result = $conn->query(sprintf("SELECT * FROM user_tb WHERE email = '%s'", mysqli_real_escape_string($conn, $email)));
+
+        $stmt = $conn->prepare("SELECT * FROM user_tb WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
         if ($result->num_rows > 0) {
             $email_err = "Email taken";
         } else {
@@ -79,13 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
 
             }
         */
-            $conn->query(sprintf(
-                "INSERT INTO user_tb VALUES ('', '%s', '%s', '%s', '%s','')",
-                mysqli_real_escape_string($conn, $name),
-                mysqli_real_escape_string($conn, $username),
-                mysqli_real_escape_string($conn, $email),
-                mysqli_real_escape_string($conn, $password),
-            ));
+
+            $stmt = $conn->prepare("INSERT INTO user_tb(name, username, email, password) VALUES (?,?,?,?)");
+            $stmt->bind_param("ssss", $name, $username, $email, $password);
+            $stmt->execute();
+
             echo
             "<script>
             window.addEventListener('load', function(e){
