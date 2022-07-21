@@ -1,6 +1,6 @@
 <?php
 //gets connection from config
-require_once 'config.php';
+require 'config.php';
 //declare vars
 $name_err = $username_err = $email_err = $password_err = $confirmpassword_err = "";
 $name = $username = $email = $password = $confirmpassword = "";
@@ -51,7 +51,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
 
     //check if username taken
 
+    $stmt = $conn->prepare("SELECT * FROM user_tb WHERE username = ?");
+    $stmt->bind_param("is", $username);
 
+    $stmt->execute();
+
+    $res = $stmt->fetch();
 
     $result = $conn->query(sprintf("SELECT * FROM user_tb WHERE username = '%s'", mysqli_real_escape_string($conn, $username)));
     if ($result->num_rows > 0) {
@@ -133,6 +138,8 @@ function validate($data)
 
         <input type="submit" value="submit">
     </form>
+    <a href="login.php">Login instead</a>
+    <a href="home.php">Home</a>
 </body>
 
 </html>
