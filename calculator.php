@@ -22,7 +22,7 @@ if (!empty($_SESSION["id"])) {
 </head>
 
 <body>
-    <?php echo $name ?>
+    <h1>Welcome, <?php echo $name ?> </h1>
     <a href="logout.php">Log out</a>
 </body>
 

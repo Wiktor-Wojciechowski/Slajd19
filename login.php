@@ -1,6 +1,6 @@
 <?php
 require 'config.php';
-
+$usernameoremail = "";
 
 if (!empty($_SESSION["id"])) {
     header("Location: calculator.php");
@@ -9,25 +9,27 @@ if (!empty($_SESSION["id"])) {
         $usernameoremail = $_POST["usernameoremail"];
         $password = $_POST["password"];
 
-        $stmt = $conn->prepare("SELECT * FROM user_tb WHERE (username = ? OR email = ?)");
-        //specify type of each variable in the "" 3s - 3 vars of string type
-        $stmt->bind_param("ss", $usernameoremail, $usernameoremail);
-        $stmt->execute();
+        if (!empty($usernameoremail)) {
+            $stmt = $conn->prepare("SELECT * FROM user_tb WHERE (username = ? OR email = ?)");
+            //specify type of each variable in the "" 3s - 3 vars of string type
+            $stmt->bind_param("ss", $usernameoremail, $usernameoremail);
+            $stmt->execute();
 
-        $result = $stmt->get_result();
+            $result = $stmt->get_result();
 
-        $row = $result->fetch_assoc();
+            $row = $result->fetch_assoc();
 
-        if ($result->num_rows > 0) {
-            if ($row['password'] == $password) {
-                $_SESSION["id"] = $row["id"];
-                $_SESSION["logged-in"] = true;
-                header("Location: calculator.php");
+            if ($result->num_rows > 0) {
+                if ($row['password'] == $password) {
+                    $_SESSION["id"] = $row["id"];
+
+                    header("Location: calculator.php");
+                } else {
+                    echo "Password incorrect";
+                }
             } else {
-                echo "Password incorrect";
+                echo "User not registered";
             }
-        } else {
-            echo "User not registered";
         }
     }
 }
@@ -44,8 +46,8 @@ if (!empty($_SESSION["id"])) {
 
 <body>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
-        <label>Username or Email: <input type="text" name="usernameoremail"></label>
-        <label><input type="password" name="password"></label>
+        <label>Username or Email: <input type="text" name="usernameoremail" required value="<?php echo $usernameoremail ?>"></label>
+        <label><input type="password" name="password" required></label>
         <input type="submit" value="Log in">
     </form>
     <a href="register.php">Register instead</a>
