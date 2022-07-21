@@ -11,4 +11,4 @@ echo
     });
 </script>";
 
-header("location: login.php");
+header("location: home.php");

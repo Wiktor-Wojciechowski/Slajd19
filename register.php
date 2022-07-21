@@ -89,12 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
             $stmt->bind_param("ssss", $name, $username, $email, $password);
             $stmt->execute();
 
-            echo
-            "<script>
-            window.addEventListener('load', function(e){
-                alert('Registration successful');
-            });
-            </script>";
+            echo "<script>alert('Registration successful!');
+            window.location = 'login.php';</script>";
         }
     }
 
