@@ -46,8 +46,12 @@ if (!empty($_SESSION["id"])) {
 
 <body>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
-        <label>Username or Email: <input type="text" name="usernameoremail" required value="<?php echo $usernameoremail ?>"></label>
-        <label><input type="password" name="password" required></label>
+        <article>
+            <label>Username or Email: <input type="text" name="usernameoremail" required value="<?php echo $usernameoremail ?>"></label>
+        </article>
+        <article>
+            <label><input type="password" name="password" required></label>
+        </article>
         <input type="submit" value="Log in">
     </form>
     <a href="register.php">Register instead</a>

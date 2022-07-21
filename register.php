@@ -120,12 +120,14 @@ function validate($data)
 
 <body>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
-        <label>Name:<input type="text" name="name" required value="<?php echo $name ?>">
-            <span class="error"><?php echo $name_err ?></span></label>
-
-        <label>Username:<input type="text" name="username" required value="<?php echo $username ?>">
-            <span><?php echo $username_err ?></span></label>
-
+        <article>
+            <label for="name">Name:</label><input id="name" type="text" name="name" required value="<?php echo $name ?>">
+            <span class="error"><?php echo $name_err ?></span>
+        </article>
+        <article>
+            <label for="username">Username:</label><input id="username" type="text" name="username" required value="<?php echo $username ?>">
+            <span><?php echo $username_err ?></span>
+        </article>
         <label>Email:<input type="email" name="email" required value="<?php echo $email ?>">
             <span><?php echo $email_err ?></span></label>
 
