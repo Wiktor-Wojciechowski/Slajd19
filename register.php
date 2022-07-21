@@ -38,16 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
         $password_err = "Password is required";
     } else {
         $password = validate($_POST["password"]);
-
-        // Validate password strength
-        $uppercase = preg_match('@[A-Z]@', $password);
-        $lowercase = preg_match('@[a-z]@', $password);
-        $number    = preg_match('@[0-9]@', $password);
-        $specialChars = preg_match('@[^\w]@', $password);
-
-        if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8 || strlen($password > 50)) {
-            $password_err = 'Password should be between 8 and 50 characters long and should include at least one upper case letter, one number, and one special character.';
-        }
     }
     //validate confirm password
     if (empty($_POST["confirmpassword"])) {
@@ -58,6 +48,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
             $confirmpassword_err = "Passwords need to match";
         }
     }
+
+    //check if username taken
+
+
+
+    $result = $conn->query(sprintf("SELECT * FROM user_tb WHERE username = '%s'", mysqli_real_escape_string($conn, $username)));
+    if ($result->num_rows > 0) {
+        $username_err = "Username taken";
+    } else /* is username not taken check if email taken*/ {
+        $result = $conn->query(sprintf("SELECT * FROM user_tb WHERE email = '%s'", mysqli_real_escape_string($conn, $email)));
+        if ($result->num_rows > 0) {
+            $email_err = "Email taken";
+        } else {
+            /*
+            // Validate password strength
+            $uppercase = preg_match('@[A-Z]@', $password);
+            $lowercase = preg_match('@[a-z]@', $password);
+            $number    = preg_match('@[0-9]@', $password);
+            $specialChars = preg_match('@[^\w]@', $password);
+
+            if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8 || strlen($password > 50)) {
+                $password_err = 'Password should be between 8 and 50 characters long and should include at least one upper case letter, one number, and one special character.';
+            }else{
+
+            }
+        */
+            $conn->query(sprintf(
+                "INSERT INTO user_tb VALUES ('', '%s', '%s', '%s', '%s','')",
+                mysqli_real_escape_string($conn, $name),
+                mysqli_real_escape_string($conn, $username),
+                mysqli_real_escape_string($conn, $email),
+                mysqli_real_escape_string($conn, $password),
+            ));
+            echo
+            "<script>
+            window.addEventListener('load', function(e){
+                alert('Registration successful');
+            });
+            </script>";
+        }
+    }
+
+
+    //check if email taken
 }
 //validate inputs
 function validate($data)
