@@ -141,9 +141,6 @@ function validate($data)
 </head>
 
 <body>
-    <header>
-
-    </header>
     <main>
         <div class="main-content-wrapper">
             <div>

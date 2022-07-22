@@ -44,20 +44,28 @@ if (!empty($_SESSION["id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
     <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/registration-style.css">
 </head>
 
 <body>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
-        <article>
-            <label>Username or Email: <input type="text" name="usernameoremail" required value="<?php echo $usernameoremail ?>"></label>
-        </article>
-        <article>
-            <label><input type="password" name="password" required></label>
-        </article>
-        <input type="submit" value="Log in">
-    </form>
-    <a href="register.php">Register instead</a>
-    <a href="home.php"></a>
+    <main>
+        <div class="main-content-wrapper">
+            <h1>Log in</h1>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
+                <article>
+                    <label>Username or Email:</label>
+                    <input type="text" name="usernameoremail" required value="<?php echo $usernameoremail ?>">
+                </article>
+                <article>
+                    <label>Password:</label>
+                    <input type="password" name="password" required>
+                </article>
+                <input class="sign-up-btn" type="submit" value="Log in">
+            </form>
+            <a href="register.php">Register instead</a>
+            <a href="home.php"></a>
+        </div>
+    </main>
 </body>
 
 </html>
