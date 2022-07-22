@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
 $usernameoremail = "";
+$login_err = $pass_err = "";
 
 if (!empty($_SESSION["id"])) {
     header("Location: calculator.php");
@@ -24,12 +25,13 @@ if (!empty($_SESSION["id"])) {
                 if ($row['password'] == $password) {
                     $_SESSION["id"] = $row["id"];
 
+                    //sleep(1);
                     header("Location: calculator.php");
                 } else {
-                    echo "Password incorrect";
+                    $pass_err = "Incorrect Password";
                 }
             } else {
-                echo "User not registered";
+                $login_err = "User not registered";
             }
         }
     }
@@ -53,11 +55,11 @@ if (!empty($_SESSION["id"])) {
             <h1>Log in</h1>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
                 <article>
-                    <label>Username or Email:</label>
+                    <label>Username or Email:</label><span class="error"><?php echo $login_err ?></span>
                     <input type="text" name="usernameoremail" required value="<?php echo $usernameoremail ?>">
                 </article>
                 <article>
-                    <label>Password:</label>
+                    <label>Password:</label><span class="error"><?php echo $pass_err ?></span>
                     <input type="password" name="password" required>
                 </article>
                 <input class="sign-up-btn" type="submit" value="Log in">

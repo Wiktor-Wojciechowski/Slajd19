@@ -93,10 +93,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
             $uppercase = preg_match('@[A-Z]@', $password);
             $lowercase = preg_match('@[a-z]@', $password);
             $number    = preg_match('@[0-9]@', $password);
-            $specialChars = preg_match('@[^\w]@', $password);
+            //$specialChars = preg_match('@[^\w]@', $password);
 
-            if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8 || strlen($password) > 50) {
-                $password_err = 'Password should be between 8 and 50 characters long and should include at least one upper case letter, one number, and one special character.';
+            if (!$uppercase || !$lowercase || !$number || /*!$specialChars ||*/ strlen($password) < 8 || strlen($password) > 50) {
+                $password_err = 'Password should be between 8 and 50 characters, include at least one upper case letter and one number.' /*and one special character.*/;
             } else {
                 //check is passwords match
                 if ($password !== $confirmpassword) {

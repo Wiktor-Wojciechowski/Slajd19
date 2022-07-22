@@ -12,6 +12,7 @@
     <h1>Welcome</h1>
     <a href="login.php">Login</a>
     <a href="register.php">Register</a>
+    <a href="calculator.php">Calculator</a>
 </body>
 
 </html>
