@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
 
+//get the user's name, if not logged in redirect to login.php
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $res = $conn->query("SELECT * FROM user_tb WHERE id='$id'");
@@ -8,6 +9,20 @@ if (!empty($_SESSION["id"])) {
     $name = $row["name"];
 } else {
     header("Location: login.php");
+}
+
+$diameter_err = "";
+$volume = 0;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $diameter = $_POST["diameter"];
+    if (is_numeric($diameter)) {
+        $radius = $diameter / 2.0;
+        $pi = 3.14;
+        $volume = round(4 / 3 * $pi * ($radius ** 3), 30);
+    } else {
+        $diameter_err = "Invalid input";
+    }
 }
 
 ?>
@@ -23,12 +38,21 @@ if (!empty($_SESSION["id"])) {
 
 <body>
     <header>
-        <h1>Welcome, <?php echo $name ?> </h1>
-        <a href="logout.php">Log out</a>
+        <h1 class="greeting">Welcome, <?php echo $name ?> </h1>
+        <span><a href="logout.php">Log out</a></span>
     </header>
     <main>
-        <div class="calculator"></div>
-        <div class="calculator-result"></div>
+        <div class="calculator">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
+                <article>
+                    <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
+                    <input type="text" name="diameter"><span>(m)</span>
+                </article>
+            </form>
+        </div>
+        <div class="calculator-result">
+            <?php echo $volume ?><span>(m<sup>3</sup>)</span>
+        </div>
     </main>
     <footer>
 
