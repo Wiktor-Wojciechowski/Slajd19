@@ -1,6 +1,10 @@
 <?php
 //gets connection from config
+ini_set('session.cache_limiter', 'public');
+session_cache_limiter(false);
 require 'config.php';
+//prevent "document expired on back button"
+
 //declare vars
 $name_err = $username_err = $email_err = $password_err = $confirmpassword_err = "";
 $name = $username = $email = $password = $confirmpassword = "";
@@ -103,6 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
                     $stmt->bind_param("ssss", $name, $username, $email, $password);
                     $stmt->execute();
 
+                    $_POST = array();
                     echo "<script>alert('Registration successful!');
                             window.location = 'login.php';</script>";
                 }
@@ -151,19 +156,19 @@ function validate($data)
                 </article>
                 <article>
                     <label for="username">Username:</label><input id="username" type="text" name="username" required value="<?php echo $username ?>">
-                    <span><?php echo $username_err ?></span>
+                    <span class="error"><?php echo $username_err ?></span>
                 </article>
                 <article>
                     <label>Email:</label><input type="email" name="email" required value="<?php echo $email ?>">
-                    <span><?php echo $email_err ?></span>
+                    <span class="error"><?php echo $email_err ?></span>
                 </article>
                 <article>
                     <label>Password:</label><input type="password" name="password" required value="<?php echo $password ?>">
-                    <span><?php echo $password_err ?></span>
+                    <span class="error"><?php echo $password_err ?></span>
                 </article>
                 <article>
                     <label>Confirm Password:</label><input type="password" name="confirmpassword" required value="<?php echo $confirmpassword ?>">
-                    <span><?php echo $confirmpassword_err ?></span>
+                    <span class="error"><?php echo $confirmpassword_err ?></span>
                 </article>
                 <input class="sign-up-btn" type="submit" value="Sign up">
             </form>
