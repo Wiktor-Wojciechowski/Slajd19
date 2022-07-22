@@ -22,8 +22,18 @@ if (!empty($_SESSION["id"])) {
 </head>
 
 <body>
-    <h1>Welcome, <?php echo $name ?> </h1>
-    <a href="logout.php">Log out</a>
+    <header>
+        <h1>Welcome, <?php echo $name ?> </h1>
+        <a href="logout.php">Log out</a>
+    </header>
+    <main>
+        <div class="calculator"></div>
+        <div class="calculator-result"></div>
+    </main>
+    <footer>
+
+    </footer>
+
 </body>
 
 </html>

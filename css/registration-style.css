@@ -1,23 +1,52 @@
-* {
-    margin: 0;
-    padding: 0;
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #4188fa;
 }
 
-html {
-    background-color: #90a8cf;
+main form {
+    display: flex;
+    flex-direction: column;
 }
 
-body {
-    width: 90vw;
-    max-width: 800px;
-    margin: auto;
+input {
+    height: 40px;
+    width: 100%;
+}
 
-    font-size: 24px;
-    background-color: #4188fa
+.main-content-wrapper>* {
+    text-align: center;
+    font-size: 30px;
+}
+
+article {
+    padding: 10px 30px;
+    vertical-align: middle;
 }
 
 label {
-    display: inline-block;
+    display: block;
+    text-align: left;
+}
 
+@media only screen and (min-width:600px) {
+    main {
+        width: 500px;
+        height: fit-content;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border-radius: 5px;
+        background-color: #4188fa;
+        transform: translate(-50%, -50%);
+        padding: 100px;
+    }
 
+    .main-content-wrapper {
+        font-size: 1em;
+    }
 }
