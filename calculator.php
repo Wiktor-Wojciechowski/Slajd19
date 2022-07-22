@@ -12,7 +12,7 @@ if (!empty($_SESSION["id"])) {
 }
 
 $diameter_err = "";
-$volume = 0;
+$diameter = $volume = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $diameter = $_POST["diameter"];
@@ -33,25 +33,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sphere Volume Calculator</title>
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/calculator-style.css">
+
 </head>
 
 <body>
-    <header>
-        <h1 class="greeting">Welcome, <?php echo $name ?> </h1>
-        <span><a href="logout.php">Log out</a></span>
-    </header>
+
     <main>
-        <div class="calculator">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
-                <article>
-                    <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
-                    <input type="text" name="diameter"><span>(m)</span>
-                </article>
-            </form>
-        </div>
-        <div class="calculator-result">
-            <?php echo $volume ?><span>(m<sup>3</sup>)</span>
+        <div class="main-content-wrapper">
+            <header>
+                <h1 class="greeting">Welcome, <?php echo $name ?> </h1>
+                <span><a href="logout.php">Log out</a></span>
+            </header>
+            <div class="calculator">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
+                    <article>
+                        <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
+                        <input type="text" name="diameter" value="<?php echo $diameter ?>"><span>(m)</span>
+                    </article>
+                </form>
+            </div>
+            <div class="calculator-result">
+                <?php echo "Volume = " . $volume ?><span>(m<sup>3</sup>)</span>
+            </div>
         </div>
     </main>
     <footer>
