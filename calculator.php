@@ -21,15 +21,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $radius = $diameter / 2.0;
         $pi = 3.14;
         $volume = round(4 / 3 * $pi * ($radius ** 3), 5);
+        if (isset($_POST['save'])) {
+            $stmt = $conn->prepare('UPDATE user_tb SET sphere_volume = ? WHERE id = ?');
+            $stmt->bind_param("di", $volume, $_SESSION['id']);
+            $stmt->execute();
+
+            $saved_message = "Volume saved!";
+        }
     } else {
         $diameter_err = "Invalid input";
-    }
-    if (isset($_POST['save'])) {
-        $stmt = $conn->prepare('UPDATE user_tb SET sphere_volume = ? WHERE id = ?');
-        $stmt->bind_param("di", $volume, $_SESSION['id']);
-        $stmt->execute();
-
-        $saved_message = "Volume saved!";
     }
 }
 
@@ -66,10 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST" id="form-1">
                         <article>
                             <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
-                            <input type="text" name="diameter" value="<?php echo $diameter ?>"><span>(m)</span>
+                            <input id="diameter-input" type="text" name="diameter" value="<?php echo $diameter ?>"><span>(m)</span>
                         </article>
                         <article>
-                            <input class="btn" type="submit" name="calculate" value="Calculate">
+                            <input id="calc-btn" class="btn" type="submit" name="calculate" value="Calculate">
                         </article>
                         <article>
                             <input class="btn" type="submit" name="save" value="Save">
@@ -77,9 +77,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <article><span><?php echo $saved_message ?></span></article>
 
                     </form>
+
                 </div>
                 <div class="calculator-result">
-                    <?php echo "Volume = " . $volume ?><span>(m<sup>3</sup>)</span>
+                    <span>Volume = </span><?php echo "<span class='result'>" . $volume . "</span>" ?><span>(m<sup>3</sup>)</span>
                 </div>
             </div>
             </main>
