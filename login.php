@@ -61,10 +61,10 @@ if (!empty($_SESSION["id"])) {
                     <label>Password:</label><span class="error"><?php echo $pass_err ?></span>
                     <input type="password" name="password" required>
                 </article>
-                <input class="sign-up-btn" type="submit" value="Log in">
+                <input class="btn" type="submit" value="Log in">
             </form>
             <a href="register.php">Register instead</a>
-            <a href="home.php"></a>
+            <a href="home.php">Home</a>
         </div>
     </main>
 </body>

@@ -157,7 +157,7 @@ function validate($data)
                     <label>Confirm Password:</label><input type="password" name="confirmpassword" required value="<?php echo $confirmpassword ?>">
                     <span class="error"><?php echo $confirmpassword_err ?></span>
                 </article>
-                <input class="sign-up-btn" type="submit" value="Sign up">
+                <input class="btn" type="submit" value="Sign up">
             </form>
             <section>
                 <a href="login.php">Login instead</a>

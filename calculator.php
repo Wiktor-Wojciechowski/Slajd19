@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Sphere Volume Calculator</title>
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/calculator-style.css">
-
+    <link rel="stylesheet" href="css/registration-style.css">
 </head>
 
 <body>
