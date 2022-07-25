@@ -10,113 +10,103 @@ $name_err = $username_err = $email_err = $password_err = $confirmpassword_err = 
 $name = $username = $email = $password = $confirmpassword = "";
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
+if (!empty($_SESSION["id"])) {
+    header("Location: calculator.php");
+} else {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") /*<-check if form was submitted*/ {
 
-
-
-    //validate name
-    if (empty($_POST["name"])) {
-        $name_err = "Name is required";
-    } else {
-        $name = validate($_POST["name"]);
-        //check if name contains only letters and whitespace
-        if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
-            $name_err = "Only letters and white spaces";
+        //validate name
+        if (empty($_POST["name"])) {
+            $name_err = "Name is required";
+        } else {
+            $name = validate($_POST["name"]);
+            //check if name contains only letters and whitespace
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+                $name_err = "Only letters and white spaces";
+            } else {
+                if (strlen($name) > 100) {
+                    $name_err = "Name too long - max 100 characters";
+                }
+            }
         }
-    }
 
-
-
-    //validate username
-    if (empty($_POST["username"])) {
-        $username_err = "Username is required";
-    } else {
-        $username = validate($_POST["username"]);
-    }
-
-
-
-    //validate email
-    if (empty($_POST["email"])) {
-        $email_err = "Email is required";
-    } else {
-        $email = validate($_POST["email"]);
-        //php email validation
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $email_err = "Invalid email format";
+        //validate username
+        if (empty($_POST["username"])) {
+            $username_err = "Username is required";
+        } else {
+            $username = validate($_POST["username"]);
         }
-    }
 
+        //validate email
+        if (empty($_POST["email"])) {
+            $email_err = "Email is required";
+        } else {
+            $email = validate($_POST["email"]);
+            //php email validation
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $email_err = "Invalid email format";
+            }
+        }
 
+        //validate password
+        if (empty($_POST["password"])) {
+            $password_err = "Password is required";
+        } else {
+            $password = validate($_POST["password"]);
+        }
 
-    //validate password
-    if (empty($_POST["password"])) {
-        $password_err = "Password is required";
-    } else {
-        $password = validate($_POST["password"]);
-    }
+        //validate confirm password
+        if (empty($_POST["confirmpassword"])) {
+            $confirmpassword_err = "Passwords need to match";
+        } else {
+            $confirmpassword = validate($_POST["confirmpassword"]);
+        }
 
-
-
-    //validate confirm password
-    if (empty($_POST["confirmpassword"])) {
-        $confirmpassword_err = "Passwords need to match";
-    } else {
-        $confirmpassword = validate($_POST["confirmpassword"]);
-    }
-
-
-
-    //check if username taken
-    $stmt = $conn->prepare("SELECT * FROM user_tb WHERE username = ?");
-    $stmt->bind_param("s", $username);
-
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $username_err = "Username taken";
-    } else /* if username not taken check if email taken*/ {
-
-        $stmt = $conn->prepare("SELECT * FROM user_tb WHERE email = ?");
-        $stmt->bind_param("s", $email);
+        //check if username taken
+        $stmt = $conn->prepare("SELECT * FROM user_tb WHERE username = ?");
+        $stmt->bind_param("s", $username);
         $stmt->execute();
-
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            $email_err = "Email taken";
-        } else {
+            $username_err = "Username taken";
+        } else /* if username not taken check if email taken*/ {
 
-            // Validate password strength
-            $uppercase = preg_match('@[A-Z]@', $password);
-            $lowercase = preg_match('@[a-z]@', $password);
-            $number    = preg_match('@[0-9]@', $password);
-            //$specialChars = preg_match('@[^\w]@', $password);
+            $stmt = $conn->prepare("SELECT * FROM user_tb WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-            if (!$uppercase || !$lowercase || !$number || /*!$specialChars ||*/ strlen($password) < 8 || strlen($password) > 50) {
-                $password_err = 'Password should be between 8 and 50 characters, include at least one upper case letter and one number.' /*and one special character.*/;
+            if ($result->num_rows > 0) {
+                $email_err = "Email taken";
             } else {
-                //check is passwords match
-                if ($password !== $confirmpassword) {
-                    $confirmpassword_err = "Passwords need to match";
-                } else {
-                    //register the user
-                    $stmt = $conn->prepare("INSERT INTO user_tb(name, username, email, password) VALUES (?,?,?,?)");
-                    $stmt->bind_param("ssss", $name, $username, $email, $password);
-                    $stmt->execute();
 
-                    $_POST = array();
-                    echo "<script>alert('Registration successful!');
+                // Validate password strength
+                $uppercase = preg_match('@[A-Z]@', $password);
+                $lowercase = preg_match('@[a-z]@', $password);
+                $number    = preg_match('@[0-9]@', $password);
+                //$specialChars = preg_match('@[^\w]@', $password);
+
+                if (!$uppercase || !$lowercase || !$number || /*!$specialChars ||*/ strlen($password) < 8 || strlen($password) > 50) {
+                    $password_err = 'Password should be between 8 and 50 characters, include at least one upper case letter and one number.' /*and one special character.*/;
+                } else {
+                    //check is passwords match
+                    if ($password !== $confirmpassword) {
+                        $confirmpassword_err = "Passwords need to match";
+                    } else {
+                        //register the user
+                        $stmt = $conn->prepare("INSERT INTO user_tb(name, username, email, password) VALUES (?,?,?,?)");
+                        $stmt->bind_param("ssss", $name, $username, $email, $password);
+                        $stmt->execute();
+
+                        $_POST = array();
+                        echo "<script>alert('Registration successful!');
                             window.location = 'login.php';</script>";
+                    }
                 }
             }
         }
     }
-
-
-    //check if email taken
 }
 //validate inputs
 function validate($data)
@@ -175,7 +165,6 @@ function validate($data)
             </section>
         </div>
     </main>
-
 
 </body>
 
