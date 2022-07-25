@@ -25,6 +25,9 @@
                 <li>
                     <a href="calculator.php">Calculator</a>
                 </li>
+                <li>
+                    <a href="about.php">About</a>
+                </li>
             </ul>
         </div>
 
