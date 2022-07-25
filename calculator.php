@@ -50,40 +50,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div class="wrapper">
-        <header>
-            <h1 class="greeting">Welcome, <span><?php echo $name ?></span></h1>
-            <span><a href="logout.php">Log out</a></span>
-            <span><a href="home.php">Home</a></span>
-        </header>
-        <main>
-            <div class="main-content-wrapper">
-                <h2>Sphere Volume Calulator</h2>
-                <div class="calculator">
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST" id="form-1">
-                        <article>
-                            <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
-                            <input type="text" name="diameter" value="<?php echo $diameter ?>"><span>(m)</span>
-                        </article>
-                        <article>
-                            <input class="btn" type="submit" name="calculate" value="Calculate">
-                        </article>
-                        <article>
-                            <input class="btn" type="submit" name="save" value="Save">
-                        </article>
-                        <article><span><?php echo $saved_message ?></span></article>
+    <header>
+        <h1 class="greeting">Welcome, <span><?php echo $name ?></span></h1>
+        <div class="links">
+            <span><a href="home.php"><img src="images/home.svg" title="Home" alt="Home"></a></span>
+            <span><a href="logout.php"><img src="images/logout.png" title="Log Out" alt="Log Out"></a></span>
+        </div>
+    </header>
+    <main>
+        <div class="main-content-wrapper">
+            <h2>Sphere Volume Calulator</h2>
+            <div class="calculator">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST" id="form-1">
+                    <article>
+                        <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
+                        <input type="text" name="diameter" value="<?php echo $diameter ?>"><span>(m)</span>
+                    </article>
+                    <article>
+                        <input class="btn" type="submit" name="calculate" value="Calculate">
+                    </article>
+                    <article>
+                        <input class="btn" type="submit" name="save" value="Save">
+                    </article>
+                    <article><span><?php echo $saved_message ?></span></article>
 
-                    </form>
-                </div>
-                <div class="calculator-result">
-                    <?php echo "Volume = " . $volume ?><span>(m<sup>3</sup>)</span>
-                </div>
+                </form>
             </div>
-        </main>
-        <footer>
+            <div class="calculator-result">
+                <?php echo "Volume = " . $volume ?><span>(m<sup>3</sup>)</span>
+            </div>
+        </div>
+    </main>
+    <footer>
 
-        </footer>
-    </div>
+    </footer>
 </body>
 
 </html>
