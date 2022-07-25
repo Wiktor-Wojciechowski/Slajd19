@@ -3,7 +3,7 @@ a:active {
     color: #001b4b;
 }
 
-main {
+.main {
     width: 100%;
     min-height: 100%;
     background-color: #4188fa;
@@ -64,7 +64,7 @@ label {
 
 
 @media only screen and (min-width:600px) {
-    main {
+    .main {
         background-color: unset;
         width: 100%;
         display: flex;

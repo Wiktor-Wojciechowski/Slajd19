@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <main>
+    <div class="main">
         <div class="main-content-wrapper">
             <h1>Home</h1>
             <ul>
@@ -28,7 +28,7 @@
             </ul>
         </div>
 
-    </main>
+        </main>
 </body>
 
 </html>

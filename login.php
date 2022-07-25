@@ -49,7 +49,7 @@ if (!empty($_SESSION["id"])) {
 </head>
 
 <body>
-    <main>
+    <div class="main">
         <div class="main-content-wrapper">
             <h1>Log in</h1>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
@@ -66,7 +66,7 @@ if (!empty($_SESSION["id"])) {
             <a href="register.php">Register instead</a>
             <a href="home.php">Home</a>
         </div>
-    </main>
+        </main>
 </body>
 
 </html>

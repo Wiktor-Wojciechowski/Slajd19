@@ -6,6 +6,11 @@ header {
     padding: 12px;
     flex-wrap: wrap;
     word-break: break-all;
+    min-height: 10%;
+}
+
+.wrapper {
+    height: 100vh;
 }
 
 .links a {
@@ -17,10 +22,8 @@ img {
     height: 40px;
 }
 
-main {
-    min-height: 90% !important;
-}
+.main {
+    color: red;
 
-.wrapper {
-    height: 100vh;
+    min-height: 90%;
 }

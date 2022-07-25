@@ -131,7 +131,7 @@ function validate($data)
 </head>
 
 <body>
-    <main>
+    <div class="main">
         <div class="main-content-wrapper">
             <div>
                 <h1>Sign up</h1>
@@ -164,7 +164,7 @@ function validate($data)
                 <a href="home.php">Home</a>
             </section>
         </div>
-    </main>
+        </main>
 
 </body>
 

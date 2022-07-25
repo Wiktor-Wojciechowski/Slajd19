@@ -45,45 +45,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sphere Volume Calculator</title>
     <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/calculator-style.css">
     <link rel="stylesheet" href="css/registration-style.css">
+    <link rel="stylesheet" href="css/calculator-style.css">
+
 </head>
 
 <body>
-    <header>
-        <h1 class="greeting">Welcome, <span><?php echo $name ?></span></h1>
-        <div class="links">
-            <span><a href="home.php"><img src="images/home.svg" title="Home" alt="Home"></a></span>
-            <span><a href="logout.php"><img src="images/logout.png" title="Log Out" alt="Log Out"></a></span>
-        </div>
-    </header>
-    <main>
-        <div class="main-content-wrapper">
-            <h2>Sphere Volume Calulator</h2>
-            <div class="calculator">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST" id="form-1">
-                    <article>
-                        <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
-                        <input type="text" name="diameter" value="<?php echo $diameter ?>"><span>(m)</span>
-                    </article>
-                    <article>
-                        <input class="btn" type="submit" name="calculate" value="Calculate">
-                    </article>
-                    <article>
-                        <input class="btn" type="submit" name="save" value="Save">
-                    </article>
-                    <article><span><?php echo $saved_message ?></span></article>
-
-                </form>
+    <div class="wrapper">
+        <header>
+            <h1 class="greeting">Welcome, <span><?php echo $name ?></span></h1>
+            <div class="links">
+                <span><a href="home.php"><img src="images/home.svg" title="Home" alt="Home"></a></span>
+                <span><a href="logout.php"><img src="images/logout.png" title="Log Out" alt="Log Out"></a></span>
             </div>
-            <div class="calculator-result">
-                <?php echo "Volume = " . $volume ?><span>(m<sup>3</sup>)</span>
-            </div>
-        </div>
-    </main>
-    <footer>
+        </header>
+        <div class="main">
+            <div class="main-content-wrapper">
+                <h2>Sphere Volume Calulator</h2>
+                <div class="calculator">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST" id="form-1">
+                        <article>
+                            <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
+                            <input type="text" name="diameter" value="<?php echo $diameter ?>"><span>(m)</span>
+                        </article>
+                        <article>
+                            <input class="btn" type="submit" name="calculate" value="Calculate">
+                        </article>
+                        <article>
+                            <input class="btn" type="submit" name="save" value="Save">
+                        </article>
+                        <article><span><?php echo $saved_message ?></span></article>
 
-    </footer>
+                    </form>
+                </div>
+                <div class="calculator-result">
+                    <?php echo "Volume = " . $volume ?><span>(m<sup>3</sup>)</span>
+                </div>
+            </div>
+            </main>
+            <footer>
+
+            </footer>
+        </div>
 </body>
 
 </html>
