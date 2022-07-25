@@ -40,30 +40,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-
-    <main>
-        <div class="main-content-wrapper">
-            <header>
-                <h1 class="greeting">Welcome, <?php echo $name ?> </h1>
-                <span><a href="logout.php">Log out</a></span>
-            </header>
-            <div class="calculator">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
-                    <article>
-                        <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
-                        <input type="text" name="diameter" value="<?php echo $diameter ?>"><span>(m)</span>
-                    </article>
-                </form>
+    <div class="wrapper">
+        <header>
+            <h1 class="greeting">Welcome, <?php echo $name ?> </h1>
+            <span><a href="logout.php">Log out</a></span>
+        </header>
+        <main>
+            <div class="main-content-wrapper">
+                <h2>Sphere Volume Calulator</h2>
+                <div class="calculator">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
+                        <article>
+                            <label>Enter diameter:</label><span class="error"><?php echo $diameter_err ?></span>
+                            <input type="text" name="diameter" value="<?php echo $diameter ?>"><span>(m)</span>
+                        </article>
+                    </form>
+                </div>
+                <div class="calculator-result">
+                    <?php echo "Volume = " . $volume ?><span>(m<sup>3</sup>)</span>
+                </div>
             </div>
-            <div class="calculator-result">
-                <?php echo "Volume = " . $volume ?><span>(m<sup>3</sup>)</span>
-            </div>
-        </div>
-    </main>
-    <footer>
+        </main>
+        <footer>
 
-    </footer>
-
+        </footer>
+    </div>
 </body>
 
 </html>

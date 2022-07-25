@@ -5,6 +5,11 @@
     font-family: sans-serif;
 }
 
+a,
+a:active {
+    color: #001b4b;
+}
+
 html {
     background-color: #94cfff;
 }

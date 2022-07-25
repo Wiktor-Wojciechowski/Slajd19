@@ -8,7 +8,6 @@ if (!empty($_SESSION["id"])) {
 } else {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usernameoremail = $_POST["usernameoremail"];
-        echo $usernameoremail;
         $password = $_POST["password"];
 
         if (!empty($usernameoremail)) {
@@ -28,7 +27,7 @@ if (!empty($_SESSION["id"])) {
                     sleep(1);
                     header("Location: calculator.php");
                 } else {
-                    $pass_err = "Incorrect Password";
+                    $pass_err = "Password Incorrect";
                 }
             } else {
                 $login_err = "User not registered";
