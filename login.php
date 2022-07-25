@@ -24,8 +24,11 @@ if (!empty($_SESSION["id"])) {
                 if ($row['password'] == $password) {
                     $_SESSION["id"] = $row["id"];
 
-                    //sleep(1);
-                    header("Location: calculator.php");
+                    echo
+                    "<script defer>
+                        alert('Logged in succesfully!');
+                        window.location.href = 'calculator.php';
+                    </script>";
                 } else {
                     $pass_err = "Password Incorrect";
                 }

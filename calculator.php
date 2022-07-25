@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </header>
         <div class="main">
             <div class="main-content-wrapper">
-                <h2>Sphere Volume Calulator</h2>
+                <h2>Sphere Volume Calculator</h2>
                 <div class="calculator">
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST" id="form-1">
                         <article>
@@ -83,10 +83,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             </main>
-            <footer>
-
-            </footer>
         </div>
 </body>
+<script src="js/calculator.js" defer>
+</script>
 
 </html>

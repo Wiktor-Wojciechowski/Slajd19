@@ -1,12 +1,13 @@
 header {
     display: flex;
-    background-color: #386dc2;
+    background-color: rgb(56, 109, 194);
     align-items: center;
     justify-content: space-between;
     padding: 12px;
     flex-wrap: wrap;
     word-break: break-all;
     min-height: 10%;
+    box-shadow: 0px 0px 10px rgb(39, 75, 134);
 }
 
 .wrapper {
