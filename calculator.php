@@ -49,7 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h1 class="greeting">Welcome, <span><?php echo $name ?></span></h1>
             <div class="links">
                 <span><a href="home.php"><img src="images/home.svg" title="Home" alt="Home"></a></span>
+                <span><a href="calculator.php"><img src="images/calculator.png" title="Calculator" alt="Calculator"></a></span>
                 <span><a href="logout.php"><img src="images/logout.png" title="Log Out" alt="Log Out"></a></span>
+
             </div>
         </header>
         <div class="main">

@@ -62,6 +62,9 @@ label {
     background-color: #001b4b;
 }
 
+.btn:focus {
+    border: 2px solid rgb(209, 227, 255);
+}
 
 @media only screen and (min-width:600px) {
     .main {
