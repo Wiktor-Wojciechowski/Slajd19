@@ -93,12 +93,13 @@ if (!empty($_SESSION["id"])) {
         }
 
         // Validate password strength
+
         $uppercase = preg_match('@[A-Z]@', $password);
         $lowercase = preg_match('@[a-z]@', $password);
         $number    = preg_match('@[0-9]@', $password);
         //$specialChars = preg_match('@[^\w]@', $password);
 
-        if (!$uppercase || !$lowercase || !$number || /*!$specialChars ||*/ strlen($password) < 8 || strlen($password) > 50) {
+        if (!$uppercase || !$lowercase || !$number || /*!$specialChars ||*/ strlen($password) < 8) {
             $password_err = 'Password should be at least 8 characters long, include at least one upper case and lower case letter and one number.' /*and one special character.*/;
             $error = 1;
         }
@@ -109,11 +110,14 @@ if (!empty($_SESSION["id"])) {
         }
 
 
-
         if ($error == 0) {
             //register the user
+
+            //hash password
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
             $stmt = $conn->prepare("INSERT INTO user_tb(name, username, email, password) VALUES (?,?,?,?)");
-            $stmt->bind_param("ssss", $name, $username, $email, $password);
+            $stmt->bind_param("ssss", $name, $username, $email, $hashed_password);
             $stmt->execute();
 
             $_POST = array();

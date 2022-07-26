@@ -21,7 +21,8 @@ if (!empty($_SESSION["id"])) {
             $row = $result->fetch_assoc();
 
             if ($result->num_rows > 0) {
-                if ($row['password'] == $password) {
+
+                if (password_verify($password, $row['password'])) {
                     $_SESSION["id"] = $row["id"];
 
                     echo
