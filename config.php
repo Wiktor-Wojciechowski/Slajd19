@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "users";
+$servername = "66062.m.tld.pl";
+$user = "admin66062_praktykanci";
+$pass = "5Ol1652RM)";
+$dbname = "baza66062_praktykanci";
 //establishing connection to db
 $conn = new mysqli($servername, $user, $pass, $dbname);
 if ($conn->connect_errno) {
