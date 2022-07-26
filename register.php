@@ -21,12 +21,14 @@ if (!empty($_SESSION["id"])) {
             $name_err = "Name is required";
             $error = 1;
         } else {
+
             $name = htmlentities($_POST["name"]);
+            $name = trim($name);
 
             //check if name contains only letters and whitespace
             if (!preg_match("/^([a-zA-Z ']*)$/", html_entity_decode($name))) {
                 echo $name;
-                $name_err = "Only letters and white spaces";
+                $name_err = "Only letters, apostrophes and white spaces";
                 $error = 1;
             }
         }
@@ -120,14 +122,7 @@ if (!empty($_SESSION["id"])) {
         }
     }
 }
-//validate inputs
-function validate($data)
-{
-    $data = trim($data);
-    $data = htmlspecialchars($data);
 
-    return $data;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
