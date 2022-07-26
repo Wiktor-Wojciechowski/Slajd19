@@ -100,7 +100,7 @@ if (!empty($_SESSION["id"])) {
         //$specialChars = preg_match('@[^\w]@', $password);
 
         if (!$uppercase || !$lowercase || !$number || /*!$specialChars ||*/ strlen($password) < 8 || strlen($password) > 50) {
-            $password_err = 'Password should be between 8 and 50 characters, include at least one upper case letter and one number.' /*and one special character.*/;
+            $password_err = 'Password should be at least 8 characters long, include at least one upper case and lower case letter and one number.' /*and one special character.*/;
             $error = 1;
         }
         //check is passwords match
