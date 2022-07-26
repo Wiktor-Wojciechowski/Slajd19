@@ -28,3 +28,22 @@ img {
 
     min-height: 90%;
 }
+
+.saved-msg {
+    opacity: 1;
+
+    animation: disappear 4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes disappear {
+    from {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    to {
+        visibility: hidden;
+        opacity: 0;
+    }
+}

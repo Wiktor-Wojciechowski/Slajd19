@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("di", $result, $_SESSION['id']);
         $stmt->execute();
 
-        $saved_message = "Volume saved!";
+        $saved_message = "<span class='saved-msg'>Volume saved!</span>";
     } else {
         $diameter_err = "Invalid input";
     }
