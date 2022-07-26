@@ -160,7 +160,7 @@ function validate($data)
                 <input class="btn" type="submit" value="Sign up">
             </form>
             <section>
-                <a href="login.php">Login instead</a>
+                <a href="login.php">Log in instead</a>
                 <a href="home.php">Home</a>
             </section>
         </div>
