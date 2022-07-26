@@ -171,7 +171,7 @@ if (!empty($_SESSION["id"])) {
             </form>
             <section>
                 <a href="login.php">Log in instead</a>
-                <a href="home.php">Home</a>
+                <a href="index.php">Home</a>
             </section>
         </div>
         </main>

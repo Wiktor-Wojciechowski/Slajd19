@@ -68,7 +68,7 @@ if (!empty($_SESSION["id"])) {
                 <input class="btn" type="submit" value="Log in">
             </form>
             <a href="register.php">Register instead</a>
-            <a href="home.php">Home</a>
+            <a href="index.php">Home</a>
         </div>
         </main>
 </body>

@@ -21,7 +21,7 @@ if (!isset($_SESSION['id'])) {
             <div class="header-wrapper">
                 <h1>About</h1>
                 <ul>
-                    <li><a href="home.php"><img src="images/home.svg" alt="Home" title="Home"></a></li>
+                    <li><a href="index.php"><img src="images/home.svg" alt="Home" title="Home"></a></li>
                     <li><a href="calculator.php"><img src="images/calculator.png" alt="Calculator" title="Calculator"></a></li>
                     <li><a href="logout.php"><img src="images/logout.png" alt="Log Out" title="Log Out"></a></li>
                 </ul>
