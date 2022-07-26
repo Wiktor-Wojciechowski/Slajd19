@@ -21,16 +21,13 @@ if (!empty($_SESSION["id"])) {
             $name_err = "Name is required";
             $error = 1;
         } else {
-            $name = validate($_POST["name"]);
+            $name = htmlentities($_POST["name"]);
+
             //check if name contains only letters and whitespace
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+            if (!preg_match("/^([a-zA-Z ']*)$/", html_entity_decode($name))) {
+                echo $name;
                 $name_err = "Only letters and white spaces";
                 $error = 1;
-            } else {
-                if (strlen($name) > 100) {
-                    $name_err = "Name too long - max 100 characters";
-                    $error = 1;
-                }
             }
         }
 
@@ -39,7 +36,7 @@ if (!empty($_SESSION["id"])) {
             $username_err = "Username is required";
             $error = 1;
         } else {
-            $username = validate($_POST["username"]);
+            $username = $_POST["username"];
         }
 
         //validate email
@@ -47,7 +44,7 @@ if (!empty($_SESSION["id"])) {
             $email_err = "Email is required";
             $error = 1;
         } else {
-            $email = validate($_POST["email"]);
+            $email = $_POST["email"];
             //php email validation
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $email_err = "Invalid email format";
@@ -60,7 +57,7 @@ if (!empty($_SESSION["id"])) {
             $password_err = "Password is required";
             $error = 1;
         } else {
-            $password = validate($_POST["password"]);
+            $password = $_POST["password"];
         }
 
         //validate confirm password
@@ -68,7 +65,7 @@ if (!empty($_SESSION["id"])) {
             $confirmpassword_err = "Passwords need to match";
             $error = 1;
         } else {
-            $confirmpassword = validate($_POST["confirmpassword"]);
+            $confirmpassword = $_POST["confirmpassword"];
         }
 
         //check if username taken
@@ -127,7 +124,6 @@ if (!empty($_SESSION["id"])) {
 function validate($data)
 {
     $data = trim($data);
-    $data = stripslashes($data);
     $data = htmlspecialchars($data);
 
     return $data;
@@ -153,7 +149,7 @@ function validate($data)
             </div>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
                 <article>
-                    <label for="name">Name:</label><input id="name" type="text" name="name" required value="<?php echo $name ?>">
+                    <label for="name">Name:</label><input id="name" type="text" name="name" required value="<?php echo ($name) ?>">
                     <span class="error"><?php echo $name_err ?></span>
                 </article>
                 <article>
